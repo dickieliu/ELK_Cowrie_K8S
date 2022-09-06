@@ -10,9 +10,6 @@
 # !/bin/sh
 kubectl create -f ./namespace.yaml
 ```
-
-<br>
-
 * 리소스 생성 및 업데이트
 ```
 # !/bin/sh
@@ -51,8 +48,6 @@ curl -X GET "http://localhost:9200"
   "tagline" : "You Know, for Search"
 }
 ```
-
-<br>
 
 * Kibana 접속 확인: `http://localhost:5601` 접속
 
