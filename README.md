@@ -5,9 +5,6 @@
 <br>
 
 ## 오브젝트 생성
-
-<br>
-
 * namespace 생성
 ```
 # !/bin/sh
@@ -29,8 +26,6 @@ kubectl apply -f ./kibana.yaml
 <br>
 
 ## 확인
-
-<br>
 
 * Elasticsearch 접속 확인
 ```
@@ -64,8 +59,6 @@ curl -X GET "http://localhost:9200"
 <br>
 
 ## ELK stack 참고
-
-<br>
 
 * image
   * Elasticsearch, Kibana: elastic에서 제공하는 기본 이미지 사용
