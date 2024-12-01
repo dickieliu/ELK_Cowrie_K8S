@@ -9,9 +9,10 @@ spec:
       protocol: TCP
       port: 5601
       targetPort: 5601
+      nodePort: 30097   # 指定 NodePort 为 30097
   selector:
     app: kibana
-  type: LoadBalancer
+  type: NodePort        # 修改类型为 NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -30,11 +31,13 @@ spec:
     spec:
       volumes:
         - name: kibana-config-volume
-          items:
-            - key: kibana.yml
-              path: kibana.yml
+          configMap:
+            name: kibana-config    # Reference the ConfigMap by name
+            items:
+              - key: kibana.yml
+                path: kibana.yml
       containers:
-        - name: waplpay-kibana
+        - name: kibana
           image: 'docker.elastic.co/kibana/kibana:7.15.2'
           imagePullPolicy: IfNotPresent
           ports:
@@ -50,5 +53,7 @@ spec:
               memory: 1Gi
           volumeMounts:
             - name: kibana-config-volume
-              mountPath: /usr/share/kibana/config
-      restartPolicy: Always        
+              mountPath: /usr/share/kibana/config/kibana.yml
+              subPath: kibana.yml
+      restartPolicy: Always
+

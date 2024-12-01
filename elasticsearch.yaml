@@ -58,17 +58,8 @@ spec:
             - name: elasticsearch-data-volume
               mountPath: /usr/share/elasticsearch/data
       restartPolicy: Always
-  volumeClaimTemplates:
-    - kind: PersistentVolumeClaim
-      apiVersion: v1
-      metadata:
-        name: elasticsearch-data-volume
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 10Gi
-        storageClassName: ssd-ceph-fs
-        volumeMode: Filesystem
-    
+      volumes:
+        - name: elasticsearch-data-volume
+          hostPath:
+            path: /data/elk
+            type: DirectoryOrCreate
